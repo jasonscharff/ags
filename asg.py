@@ -23,4 +23,5 @@ from models import AdminUser
 
 from admin_login_manager import *
 
+from randomizer import build_database, assign_targets
 

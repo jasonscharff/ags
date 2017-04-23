@@ -1,14 +1,35 @@
 from mongoengine import *
 from passlib.hash import sha256_crypt
+import datetime
+
+
+class Mission(EmbeddedDocument):
+    time = DateTimeField(default=datetime.datetime.utcnow())
+    target = ReferenceField('Assassin', required=False)
+
+    def __unicode__(self):
+        return unicode(self.target)
 
 class Assassin(DynamicDocument):
-    name = StringField(required=True)
-    email = EmailField()
+    name = StringField(required=True, unique=True)
+    email = EmailField(unique=True)
 
     killed_time = DateTimeField()
 
-    targets = DictField()
-    kills = DictField()
+    targets = EmbeddedDocumentListField(Mission)
+    kills = EmbeddedDocumentListField(Mission)
+
+    random_order = IntField()
+
+    def __unicode__(self):
+        return self.name
+
+    meta = {
+        'indexes': [
+            {'fields': ['name'], 'unique': True}
+        ]
+    }
+
 
 
 

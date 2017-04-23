@@ -99,3 +99,5 @@ ENV/
 
 #pycharm
 .idea/
+
+resources/names.csv
