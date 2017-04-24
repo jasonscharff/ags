@@ -30,29 +30,7 @@ from models import AdminUser
 
 from game_logic import  assign_targets, kill_inactive, mark_dead
 
-def daily_action():
-    print 'hello, world'
-    kill_inactive()
-    assign_targets()
-    threading.Timer(60*60*24, daily_action()).start()
-
-
-import threading
-
-def start_timer():
-    x = datetime.datetime.today()
-    if x.minute > 32:
-        y = x.replace(day=x.day + 1, hour=7, minute=32, second=0, microsecond=0)
-        delta_t = y - x
-        secs = delta_t.seconds + 1
-    else:
-        y = x.replace(day=x.day, hour=7, minute=32, second=0, microsecond=0)
-        delta_t = y - x
-        secs = delta_t.seconds + 1
-
-    threading.Timer(secs, daily_action).start()
-
-start_timer()
+assign_targets()
 
 from admin_login_manager import *
 
