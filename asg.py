@@ -6,7 +6,7 @@ import time
 from flask import  request, Response
 from threading import Timer
 import datetime
-from flask_apscheduler import APScheduler
+from apscheduler.scheduler import Scheduler
 
 app = Flask(__name__)
 
