@@ -27,7 +27,6 @@ db.init_app(app)
 
 from models import AdminUser
 
-from admin_login_manager import *
 from game_logic import  assign_targets, kill_inactive, mark_dead
 
 def daily_action():
@@ -39,7 +38,7 @@ def daily_action():
 
 
 x=datetime.datetime.today()
-y=x.replace(day=x.day, hour=7, minute=2, second=0, microsecond=0)
+y=x.replace(day=x.day, hour=7, minute=4, second=0, microsecond=0)
 delta_t=y-x
 
 secs=delta_t.seconds+1
@@ -49,7 +48,7 @@ t = Timer(secs, daily_action)
 t.start()
 
 
-
+from admin_login_manager import *
 
 @app.route('/twilio/dead', methods=['POST'])
 def mark_dead_handler():
