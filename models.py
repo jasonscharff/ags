@@ -11,6 +11,8 @@ class Mission(EmbeddedDocument):
         return unicode(self.target)
 
 class Assassin(DynamicDocument):
+
+
     name = StringField(required=True, unique=True)
     email = EmailField(unique=True)
 
@@ -18,6 +20,8 @@ class Assassin(DynamicDocument):
 
     targets = EmbeddedDocumentListField(Mission)
     kills = EmbeddedDocumentListField(Mission)
+
+    kill_exemption = IntField(default=0)
 
     random_order = IntField()
 
