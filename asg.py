@@ -33,6 +33,7 @@ def daily_action():
     assign_targets()
 
 schedule.every().day.at("12:00").do(daily_action)
+schedule.run_pending()
 
 @app.route('/twilio/dead', methods=['POST'])
 def mark_dead_handler():
