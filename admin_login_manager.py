@@ -39,7 +39,7 @@ def init_login():
     admin_view.add_views(SecureModelView(AdminUser))
     admin_view.add_views(SecureModelView(Assassin))
 
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=80)
 
 
 
