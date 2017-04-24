@@ -4,7 +4,8 @@ import os
 import schedule
 import time
 from flask import  request, Response
-from threading import Thread
+from threading import Timer
+import datetime
 
 app = Flask(__name__)
 
@@ -32,19 +33,21 @@ from game_logic import  assign_targets, kill_inactive, mark_dead
 def daily_action():
     kill_inactive()
     assign_targets()
-
-def schedule_loop():
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+    t = Timer(24*60*60, daily_action)
+    t.start()
 
 
-schedule.every().day.at("12:00").do(daily_action)
-schedule.run_pending()
+x=datetime.today()
+y=x.replace(day=x.day, hour=6, minute=53, second=0, microsecond=0)
+delta_t=y-x
 
-t1 = Thread(target = schedule_loop)
-t1.setDaemon(True)
-t1.start()
+secs=delta_t.seconds+1
+
+
+t = Timer(secs, daily_action)
+t.start()
+
+
 
 
 @app.route('/twilio/dead', methods=['POST'])
