@@ -6,6 +6,7 @@ import time
 from flask import  request, Response
 from threading import Timer
 import datetime
+from flask_apscheduler import APScheduler
 
 app = Flask(__name__)
 
@@ -33,19 +34,11 @@ def daily_action():
     print 'hello, world'
     kill_inactive()
     assign_targets()
-    t = Timer(24*60*60, daily_action)
-    t.start()
 
 
-x=datetime.datetime.today()
-y=x.replace(day=x.day, hour=7, minute=4, second=0, microsecond=0)
-delta_t=y-x
-
-secs=delta_t.seconds+1
-
-
-t = Timer(secs, daily_action)
-t.start()
+sched = APScheduler()
+sched.start()
+sched.add_job(daily_action, trigger='cron', hour='07', minute='11')
 
 
 from admin_login_manager import *
