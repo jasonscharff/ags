@@ -31,6 +31,7 @@ from admin_login_manager import *
 from game_logic import  assign_targets, kill_inactive, mark_dead
 
 def daily_action():
+    print 'hello, world'
     kill_inactive()
     assign_targets()
     t = Timer(24*60*60, daily_action)
@@ -38,7 +39,7 @@ def daily_action():
 
 
 x=datetime.datetime.today()
-y=x.replace(day=x.day, hour=6, minute=55, second=0, microsecond=0)
+y=x.replace(day=x.day, hour=7, minute=0, second=0, microsecond=0)
 delta_t=y-x
 
 secs=delta_t.seconds+1
