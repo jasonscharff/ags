@@ -1,11 +1,7 @@
 from datetime import  datetime, timedelta
 from models import  Assassin, Mission
 from random import  shuffle
-import csv
-from mailer import send_post_kill, send_new_target
-
-
-
+from mailer import send_post_kill, send_new_target, send_auto_kill
 
 
 
@@ -59,7 +55,7 @@ def mark_dead(target_name):
 
     if assassin is None:
         #should never happen
-        return
+        return False
 
     killed_mission = Mission()
     killed_mission.time = killed_time
@@ -77,6 +73,7 @@ def mark_dead(target_name):
     assassin.save()
 
     send_post_kill(email_address=assassin.email, target_name=new_mission.target.name,assasssin_name=assassin.name)
+    return True
 
 
 
@@ -99,6 +96,7 @@ def kill_inactive():
 
                 if a.kill_exemption + a.interval_kill_count < INITIAL_KILL_PERIOD_AVERAGE * INITIAL_KILL_PERIOD:
                     a.killed_time = datetime.utcnow()
+                    send_auto_kill(email_address=a.email, assasssin_name=a.name)
                     a.save()
 
             CLEARED_THRESHOLD = True
@@ -108,6 +106,7 @@ def kill_inactive():
         for a in to_die:
             if a.kill_exemption + a.interval_kill_count < MIN_KILLS_PER_DAY:
                 a.killed_time = datetime.utcnow()
+                send_auto_kill(email_address=a.email, assasssin_name=a.name)
                 a.save()
 
         reset_kill_interval_count()

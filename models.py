@@ -44,7 +44,7 @@ class Assassin(DynamicDocument):
 class AdminUser(Document):
     username = StringField(unique=True, required=True)
     hashed_password = StringField(required=True)
-    phone_number = IntField()
+    phone_number = StringField()
 
 
     def is_authenticated(self):
