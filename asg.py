@@ -34,18 +34,26 @@ def daily_action():
     print 'hello, world'
     kill_inactive()
     assign_targets()
+    threading.Timer(60*60*24, daily_action()).start()
 
 
 import threading
 
-def f():
-    # do something here ...
-    # call f() again in 60 seconds
-    print 'hello, world'
-    threading.Timer(60, f).start()
+def start_timer():
+    x = datetime.datetime.today()
+    if x.minute > 27:
+        y = x.replace(day=x.day + 7, hour=6, minute=27, second=0, microsecond=0)
+        delta_t = y - x
+        secs = delta_t.seconds + 1
+    else:
+        y = x.replace(day=x.day, hour=7, minute=27, second=0, microsecond=0)
+        delta_t = y - x
+        secs = delta_t.seconds + 1
 
-# start calling f now and every 60 sec thereafter
-f()
+    print 'hello, world'
+    threading.Timer(secs, daily_action()).start()
+
+start_timer()
 
 from admin_login_manager import *
 
