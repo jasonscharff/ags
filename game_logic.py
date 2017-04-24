@@ -6,6 +6,7 @@ from mailer import send_post_kill, send_new_target, send_auto_kill
 
 
 def assign_targets():
+    print 'hello 2'
     alive = Assassin.objects(killed_time=None)
 
     random_list = range(0, alive.count())
@@ -88,6 +89,7 @@ GAME_START_TIME = datetime(year=2017,month=4,day=24,hour=12)
 CLEARED_THRESHOLD = False
 
 def kill_inactive():
+    print 'kill inactive'
     global CLEARED_THRESHOLD
     if CLEARED_THRESHOLD is False:
         if datetime.utcnow() > GAME_START_TIME + timedelta(days=INITIAL_KILL_PERIOD):
