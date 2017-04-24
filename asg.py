@@ -4,6 +4,7 @@ import os
 import schedule
 import time
 from flask import  request, Response
+from threading import Thread
 
 app = Flask(__name__)
 
@@ -32,8 +33,19 @@ def daily_action():
     kill_inactive()
     assign_targets()
 
+def schedule_loop():
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
+
 schedule.every().day.at("12:00").do(daily_action)
 schedule.run_pending()
+
+t1 = Thread(target = schedule_loop)
+t1.setDaemon(True)
+t1.start()
+
 
 @app.route('/twilio/dead', methods=['POST'])
 def mark_dead_handler():
