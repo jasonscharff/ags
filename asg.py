@@ -36,10 +36,16 @@ def daily_action():
     assign_targets()
 
 
-sched = Scheduler()
-sched.start()
-sched.add_job(daily_action, trigger='cron', hour='07', minute='11')
+import threading
 
+def f():
+    # do something here ...
+    # call f() again in 60 seconds
+    print 'hello, world'
+    threading.Timer(60, f).start()
+
+# start calling f now and every 60 sec thereafter
+f()
 
 from admin_login_manager import *
 
