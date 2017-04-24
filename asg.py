@@ -50,8 +50,7 @@ def start_timer():
         delta_t = y - x
         secs = delta_t.seconds + 1
 
-    print 'hello, world'
-    threading.Timer(secs, daily_action()).start()
+    threading.Timer(secs, daily_action).start()
 
 start_timer()
 
