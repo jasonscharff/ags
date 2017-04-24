@@ -36,7 +36,7 @@ def daily_action():
     assign_targets()
 
 
-sched = APScheduler()
+sched = Scheduler()
 sched.start()
 sched.add_job(daily_action, trigger='cron', hour='07', minute='11')
 
