@@ -3,7 +3,7 @@ from flask_mongoengine import MongoEngine
 import os
 import schedule
 import time
-from flask import  request
+from flask import  request, Response
 
 app = Flask(__name__)
 
@@ -43,11 +43,11 @@ def mark_dead():
         if account_sid == os.environ['TWILIO_SID']:
             status = mark_dead(body)
             if status is True:
-                return 'Success'
+                return Response('Success', content_type='text/plain')
             else:
-                return 'Error'
+                return Response('Error', content_type='text/plain')
         else:
-            return 'Invalid SID'
+            return Response('Invalid SID', content_type='text/plain')
     else:
-        'return invalid number'
+        return Response('Invalid Number', content_type='text/plain')
 
