@@ -21,6 +21,8 @@ class Assassin(DynamicDocument):
     targets = EmbeddedDocumentListField(Mission)
     kills = EmbeddedDocumentListField(Mission)
 
+    interval_kill_count = IntField(default=0)
+
     kill_exemption = IntField(default=0)
 
     random_order = IntField()

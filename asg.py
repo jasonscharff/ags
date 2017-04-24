@@ -22,5 +22,9 @@ db.init_app(app)
 from models import AdminUser
 
 from admin_login_manager import *
-
+from game_logic import  assign_targets, mark_dead, kill_inactive
+from mailer import send_new_target, send_post_kill
+#assign_targets()
+#mark_dead('5')
+# kill_inactive()
 
