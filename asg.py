@@ -37,8 +37,8 @@ def daily_action():
     t.start()
 
 
-x=datetime.today()
-y=x.replace(day=x.day, hour=6, minute=53, second=0, microsecond=0)
+x=datetime.datetime.today()
+y=x.replace(day=x.day, hour=6, minute=55, second=0, microsecond=0)
 delta_t=y-x
 
 secs=delta_t.seconds+1
