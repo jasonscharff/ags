@@ -35,7 +35,7 @@ def daily_action():
 schedule.every().day.at("12:00").do(daily_action)
 
 @app.route('/twilio/dead', methods=['POST'])
-def mark_dead():
+def mark_dead_handler():
     body = request.form['Body']
     from_number = request.form['From']
     if AdminUser.objects(phone_number=from_number).count() > 0:
