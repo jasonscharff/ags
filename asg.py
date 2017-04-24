@@ -26,7 +26,7 @@ db.init_app(app)
 from models import AdminUser
 
 from admin_login_manager import *
-from game_logic import  assign_targets, kill_inactive
+from game_logic import  assign_targets, kill_inactive, mark_dead
 
 def daily_action():
     kill_inactive()
