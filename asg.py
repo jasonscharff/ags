@@ -41,12 +41,12 @@ import threading
 
 def start_timer():
     x = datetime.datetime.today()
-    if x.minute > 29:
-        y = x.replace(day=x.day + 1, hour=6, minute=29, second=0, microsecond=0)
+    if x.minute > 32:
+        y = x.replace(day=x.day + 1, hour=7, minute=32, second=0, microsecond=0)
         delta_t = y - x
         secs = delta_t.seconds + 1
     else:
-        y = x.replace(day=x.day, hour=7, minute=29, second=0, microsecond=0)
+        y = x.replace(day=x.day, hour=7, minute=32, second=0, microsecond=0)
         delta_t = y - x
         secs = delta_t.seconds + 1
 
